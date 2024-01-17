@@ -16,29 +16,33 @@ definePageMeta({
   </h1>
   <div class="flex flex-col gap-5 text-center">
     <div class="
-      px-5 py-2 border-2 rounded-xl text-lg cursor-pointer transition-colors duration-150
-      hover:bg-white hover:text-zinc-900 hover:transition-none
+      px-5 py-2 border-2 border-zinc-400 rounded-xl text-lg cursor-pointer transition-colors duration-150
+      hover:bg-zinc-900 hover:border-zinc-900 hover:text-zinc-100 hover:transition-none
+      dark:border-zinc-400 dark:hover:bg-white dark:hover:border-white dark:hover:text-zinc-900
     ">
       <UIcon name="i-fontisto-github" class="align-[-1px] mr-1"/>
       Continue with <b>GitHub</b>
     </div>
     <div class="
-      px-5 py-2 border-2 rounded-xl text-lg cursor-pointer transition-colors duration-150
-      hover:bg-white hover:text-zinc-900 hover:transition-none
+      px-5 py-2 border-2 border-zinc-400 rounded-xl text-lg cursor-pointer transition-colors duration-150
+      hover:bg-zinc-900 hover:border-zinc-900 hover:text-zinc-100 hover:transition-none
+      dark:border-zinc-400 dark:hover:bg-white dark:hover:border-white dark:hover:text-zinc-900
     ">
       <UIcon name="i-fontisto-bitbucket" class="align-[-1px] mr-1"/>
       Continue with <b>Bitbucket</b>
     </div>
     <div class="
-      px-5 py-2 border-2 rounded-xl text-lg cursor-pointer transition-colors duration-150
-      hover:bg-white hover:text-zinc-900 hover:transition-none
+      px-5 py-2 border-2 border-zinc-400 rounded-xl text-lg cursor-pointer transition-colors duration-150
+      hover:bg-zinc-900 hover:border-zinc-900 hover:text-zinc-100 hover:transition-none
+      dark:border-zinc-400 dark:hover:bg-white dark:hover:border-white dark:hover:text-zinc-900
     ">
       <UIcon name="i-fontisto-google" class="align-[-1px] mr-1"/>
       Continue with <b>Google</b>
     </div>
     <div class="
-      px-5 py-2 border-2 rounded-xl text-lg cursor-pointer transition-colors duration-150
-      hover:bg-white hover:text-zinc-900 hover:transition-none
+      px-5 py-2 border-2 border-zinc-400 rounded-xl text-lg cursor-pointer transition-colors duration-150
+      hover:bg-zinc-900 hover:border-zinc-900 hover:text-zinc-100 hover:transition-none
+      dark:border-zinc-400 dark:hover:bg-white dark:hover:border-white dark:hover:text-zinc-900
     ">
       <UIcon name="i-fontisto-facebook" class="align-[-1px] mr-1"/>
       Continue with <b>Facebook</b>
