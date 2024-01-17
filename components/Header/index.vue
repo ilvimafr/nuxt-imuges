@@ -20,14 +20,16 @@ import LogoSvg from '../assets/logo.svg?component';
       </div>
 
       <nav class="ml-auto flex gap-5">
-        <NuxtLink href="/">
-          <UIcon name="i-heroicons-fire" class="align-[-2px]"/>
-          Trending
-        </NuxtLink>
-        <NuxtLink href="/">
-          <UIcon name="i-heroicons-arrow-right-end-on-rectangle-20-solid" class="align-[-2px]"/>
-          Sign In
-        </NuxtLink>
+        <HeaderLink
+          href="/"
+          title="Trending"
+          iconName="i-heroicons-fire"
+        />
+        <HeaderLink
+          href="/login"
+          title="Log In"
+          iconName="i-heroicons-arrow-right-end-on-rectangle-20-solid"
+        />
       </nav>
 
       <ColorScheme placeholder="" class="w-9">
@@ -35,6 +37,7 @@ import LogoSvg from '../assets/logo.svg?component';
           on-icon="i-heroicons-moon"
           off-icon="i-heroicons-sun"
           size="lg"
+          color="emerald"
           :model-value="$colorMode.value === 'dark' ? true : false"
           @update:model-value="(enabled: boolean) => {
             $colorMode.preference = enabled ? 'dark' : 'light';
