@@ -27,6 +27,16 @@ const supabaseUser = useSupabaseUser();
           iconName="i-heroicons-fire"
         />
         <HeaderLink
+          href="/newest"
+          title="Newest"
+          iconName="i-heroicons-star"
+        />
+        <HeaderLink
+          href="/random"
+          title="Random"
+          iconName="i-fontisto-random"
+        />
+        <HeaderLink
           v-if="!supabaseUser"
           href="/login"
           title="Log In"
