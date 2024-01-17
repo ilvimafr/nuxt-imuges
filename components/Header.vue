@@ -1,0 +1,46 @@
+<script setup lang="ts">
+import LogoSvg from '../assets/logo.svg?component';
+</script>
+
+<template>
+  <header class="py-3 dark relative text-white">
+    <!-- Background -->
+    <div
+      class="absolute bg-zinc-800 w-full md:w-[98%] h-[300px] md:-rotate-3 -top-[120px] md:left-[1%] rounded-3xl"
+    ></div>
+
+    <div class="container flex justify-between items-center gap-10 mt-6 relative z-10">
+      <div class="">
+        <NuxtLink href="/">
+          <LogoSvg
+            height="30"
+            class="fill-white"
+          />
+        </NuxtLink>
+      </div>
+
+      <nav class="ml-auto flex gap-5">
+        <NuxtLink href="/">
+          <UIcon name="i-heroicons-fire" class="align-[-2px]"/>
+          Trending
+        </NuxtLink>
+        <NuxtLink href="/">
+          <UIcon name="i-heroicons-arrow-right-end-on-rectangle-20-solid" class="align-[-2px]"/>
+          Sign In
+        </NuxtLink>
+      </nav>
+
+      <ColorScheme placeholder="" class="w-9">
+        <UToggle
+          on-icon="i-heroicons-moon"
+          off-icon="i-heroicons-sun"
+          size="lg"
+          :model-value="$colorMode.value === 'dark' ? true : false"
+          @update:model-value="(enabled: boolean) => {
+            $colorMode.preference = enabled ? 'dark' : 'light';
+          }"
+        />
+      </ColorScheme>
+    </div>
+  </header>
+</template>
