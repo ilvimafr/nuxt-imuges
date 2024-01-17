@@ -4,6 +4,9 @@ import {type Provider} from '@supabase/gotrue-js/src/index';
 const supabaseClient = useSupabaseClient();
 
 definePageMeta({
+  middleware: [
+    'redirect-if-logged-in',
+  ],
   layout: 'centered',
 });
 
