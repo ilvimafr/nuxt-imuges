@@ -8,6 +8,10 @@ Demo available on [Vercel](https://nuxt-imuges.vercel.app)
 
 ![main-screen](https://raw.githubusercontent.com/ilvimafr/nuxt-imuges/main/.github/assets/main-screen.png)
 
+## Features
+- User authorization through GitHub
+- Dark and light modes
+
 ## Getting Started
 
 After cloning the project, use the following command to initialize the project:
@@ -16,11 +20,18 @@ After cloning the project, use the following command to initialize the project:
 npm install
 ```
 
-The next thing to do is to add environment variables to connect to Supabase. To do this, create an `.env` file in the root of the project and add `DATABASE_URL` and `DIRECT_URL` variables: 
+The next thing to do is to add environment variables to connect Prisma to Supabase. To do this, create an `.env` file in the root of the project and add `DATABASE_URL` and `DIRECT_URL` variables: 
 
 ```bash
-DATABASE_URL="postgres://postgres.glfsoowvlnuuieomaeig:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1" 
-DIRECT_URL="postgres://postgres.glfsoowvlnuuieomaeig:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:5432/postgres"
+DATABASE_URL="postgres://postgres.[SUPABASE-URL]:6543/postgres?pgbouncer=true&connection_limit=1" 
+DIRECT_URL="postgres://postgres.[SUPABASE-URL]:5432/postgres"
+```
+
+Next you need to add `SUPABASE_URL` and `SUPABASE_KEY` for user authorization:
+
+```bash
+SUPABASE_URL="[API-URL]"
+SUPABASE_KEY="[API-KEY]"
 ```
 
 
