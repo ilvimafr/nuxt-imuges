@@ -14,4 +14,7 @@ export default defineNuxtConfig({
       }
     }
   },
+  ui: {
+    icons: ['heroicons', 'fontisto']
+  },
 })
