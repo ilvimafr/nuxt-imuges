@@ -3,6 +3,7 @@ export default defineNuxtConfig({
     enabled: true,
   },
   modules: [
+    '@nuxtjs/supabase',
     '@nuxt/ui',
     '@nuxtjs/google-fonts',
     'nuxt-svgo',
@@ -15,6 +16,9 @@ export default defineNuxtConfig({
     }
   },
   ui: {
-    icons: ['heroicons', 'fontisto']
+    icons: ['heroicons', 'fontisto'],
+  },
+  supabase: {
+    redirect: false,
   },
 })

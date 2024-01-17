@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import LogoSvg from '../assets/logo.svg?component';
+const supabaseUser = useSupabaseUser();
 </script>
 
 <template>
@@ -26,9 +27,22 @@ import LogoSvg from '../assets/logo.svg?component';
           iconName="i-heroicons-fire"
         />
         <HeaderLink
+          v-if="!supabaseUser"
           href="/login"
           title="Log In"
           iconName="i-heroicons-arrow-right-end-on-rectangle-20-solid"
+        />
+        <HeaderLink
+          v-if="supabaseUser"
+          href="/profile"
+          :title="supabaseUser.email!"
+          iconName="i-heroicons-user"
+        />
+        <HeaderLink
+          v-if="supabaseUser"
+          href="/logout"
+          title="Log Out"
+          iconName="i-heroicons-arrow-left-start-on-rectangle-20-solid"
         />
       </nav>
 
