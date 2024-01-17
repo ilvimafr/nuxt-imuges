@@ -3,8 +3,9 @@ definePageMeta({
   middleware: ['redirect-if-logged-out']
 });
 
-useSupabaseClient().auth.signOut();
-navigateTo('/');
+useSupabaseClient().auth.signOut().then(() => {
+  navigateTo('/');
+});
 </script>
 
 <template>
