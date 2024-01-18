@@ -38,25 +38,25 @@ const supabaseUser = useSupabaseUser();
         />
         <HeaderLink
           v-if="!supabaseUser"
-          href="/login"
+          href="/auth/login"
           title="Log In"
           iconName="i-heroicons-arrow-right-end-on-rectangle-20-solid"
         />
         <HeaderLink
           v-if="supabaseUser"
           href="/profile"
-          :title="supabaseUser.email!"
+          :title="supabaseUser!.email!"
           iconName="i-heroicons-user"
         />
         <HeaderLink
           v-if="supabaseUser"
-          href="/logout"
+          href="/auth/logout"
           title="Log Out"
           iconName="i-heroicons-arrow-left-start-on-rectangle-20-solid"
         />
       </nav>
 
-      <ColorScheme placeholder="" class="w-9">
+      <ColorScheme placeholder="" class="w-11">
         <UToggle
           on-icon="i-heroicons-moon"
           off-icon="i-heroicons-sun"

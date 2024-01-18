@@ -14,7 +14,7 @@ function signin(provider: Provider) {
   supabaseClient.auth.signInWithOAuth({
     provider: provider,
     options: {
-      redirectTo: '/',
+      redirectTo: document.location.origin + '/auth/confirm/',
     },
   });
 }
