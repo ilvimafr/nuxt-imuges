@@ -18,6 +18,7 @@ export default defineNuxtConfig({
   ui: {
     icons: ['heroicons', 'fontisto'],
   },
+  css: ['~/assets/scss/main.scss'],
   supabase: {
     redirect: false,
   },

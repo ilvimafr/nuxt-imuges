@@ -7,10 +7,3 @@
 
   <Footer />
 </template>
-
-<style lang="scss">
-#__nuxt {
-  @apply bg-zinc-100 dark:bg-black;
-  @apply min-h-screen min-h-lvh flex flex-col items-stretch;
-}
-</style>

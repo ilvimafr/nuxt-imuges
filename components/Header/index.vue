@@ -44,8 +44,8 @@ const supabaseUser = useSupabaseUser();
         />
         <HeaderLink
           v-if="supabaseUser"
-          href="/profile"
-          :title="supabaseUser!.email!"
+          href="/dashboard/"
+          title="Dashboard"
           iconName="i-heroicons-user"
         />
         <HeaderLink
