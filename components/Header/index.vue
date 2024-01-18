@@ -14,7 +14,7 @@ const supabaseUser = useSupabaseUser();
       <div class="">
         <NuxtLink href="/">
           <LogoSvg
-            height="30"
+            height="40"
             class="fill-white"
           />
         </NuxtLink>
