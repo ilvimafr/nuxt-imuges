@@ -1,4 +1,4 @@
-<script setup="">
+<script setup lang="ts">
 definePageMeta({
   // middleware: [
   //   'redirect-if-logged-in',
@@ -6,10 +6,28 @@ definePageMeta({
   layout: 'centered',
 });
 
+const apollo = useApollo();
 const user = useSupabaseUser();
+
 watch(user, () => {
   if (user.value) {
-    return navigateTo('/');
+    // Append new user in Prisma table after confirmation if it's not already there
+    apollo.clients!.default.mutate({
+      mutation: gql`
+        mutation AddUserMutation($id: ID!, $email: String!) {
+          addUser(id: $id, email: $email)
+        }
+      `,
+      variables: {
+        id: user.value.id,
+        email: user.value.email || '',
+      },
+    }).then((result) => {
+      navigateTo('/dashboard/');
+    }).catch((err) => {
+      console.log('Confirmation error: ', err);
+      navigateTo('/auth/logout/');
+    });
   }
 }, {
   immediate: true,

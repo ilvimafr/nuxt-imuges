@@ -1,0 +1,21 @@
+type User {
+  uuid:   ID!
+  email:  String!
+  name:   String
+  images: [Image]
+}
+type Image {
+  id:        ID!
+  createdAt: String!
+  published: Boolean!
+  author:    User!
+  authorID:  ID!
+}
+
+type Query {
+  users: [User]
+}
+
+type Mutation {
+  addUser(id: ID!, email: String!): Boolean
+}

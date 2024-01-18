@@ -1,14 +1,15 @@
 import {type H3Event, type EventHandlerRequest} from 'h3';
+import { loadFiles } from '@graphql-tools/load-files';
 import { createYoga } from "graphql-yoga";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { typeDefs } from '../graphql/schema';
 import { resolvers } from '../graphql/resolvers';
 
-export const GraphQLServer = (context: H3Event<EventHandlerRequest>) => {
+
+export const GraphQLServer = async (context: H3Event<EventHandlerRequest>) => {
   return createYoga({
     schema: makeExecutableSchema({
       resolvers: resolvers,
-      typeDefs: typeDefs,
+      typeDefs: await loadFiles('./server/graphql/schema.graphql'),
     }),
     context,
     graphqlEndpoint: "/api/graphql",
@@ -21,8 +22,7 @@ export const GraphQLServer = (context: H3Event<EventHandlerRequest>) => {
 
 export default defineEventHandler(async (event) => {
   if (getRequestURL(event).pathname.startsWith("/api/graphql")) {
-    console.log('API CALLED');
     const { req, res } = event.node;
-    return GraphQLServer(event)(req, res);
+    return (await GraphQLServer(event))(req, res);
   }
 });
