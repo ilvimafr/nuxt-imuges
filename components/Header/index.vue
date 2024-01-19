@@ -56,7 +56,7 @@ const supabaseUser = useSupabaseUser();
         />
       </nav>
 
-      <ColorScheme placeholder="" class="w-11">
+      <ColorScheme class="border-2 border-transparent h-6 w-11 rounded-full bg-emerald-200 dark:bg-gray-700">
         <UToggle
           on-icon="i-heroicons-moon"
           off-icon="i-heroicons-sun"
