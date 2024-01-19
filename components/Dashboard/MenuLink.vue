@@ -15,10 +15,11 @@ const props = defineProps({
 });
 
 const inactiveClass = `
-  hover:bg-zinc-200 dark:hover:bg-zinc-700
+  hover:bg-zinc-200 text-zinc-600 hover:text-zinc-800
+  dark:hover:bg-zinc-700 dark:text-zinc-300 dark:hover:text-zinc-100
 `;
 const activeClass = `
-  bg-emerald-600 text-white
+  bg-emerald-600 font-semibold text-white [text-shadow:_0_1px_3px_rgb(0_0_0_/_40%)]
 `;
 const isActive = computed(() => useRoute().path === props.href);
 </script>
