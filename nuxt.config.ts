@@ -26,7 +26,8 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: `${getURL()}/api/graphql`
+        httpEndpoint: `${getURL()}/api/graphql`,
+        browserHttpEndpoint: '/api/graphql',
       }
     },
   },

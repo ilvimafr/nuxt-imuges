@@ -2,7 +2,6 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { Resolvers } from '../../types';
 
 const prisma = new PrismaClient();
-prisma.$connect();
 
 export const resolvers: Resolvers = {
   Query: {

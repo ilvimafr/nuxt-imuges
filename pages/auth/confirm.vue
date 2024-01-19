@@ -25,7 +25,6 @@ watch(user, () => {
     }).then((result) => {
       navigateTo('/dashboard/');
     }).catch((err) => {
-      console.log('Confirmation error: ', err);
       navigateTo('/auth/logout/');
     });
   }
