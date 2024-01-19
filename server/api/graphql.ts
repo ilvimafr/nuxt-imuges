@@ -1,15 +1,14 @@
-import {type H3Event, type EventHandlerRequest} from 'h3';
-import { loadFiles } from '@graphql-tools/load-files';
+import { type H3Event, type EventHandlerRequest } from 'h3';
 import { createYoga } from "graphql-yoga";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { resolvers } from '../graphql/resolvers';
-
+import schema from '../graphql/schema.graphql';
 
 export const GraphQLServer = async (context: H3Event<EventHandlerRequest>) => {
   return createYoga({
     schema: makeExecutableSchema({
       resolvers: resolvers,
-      typeDefs: await loadFiles('./server/graphql/schema.graphql'),
+      typeDefs: schema,
     }),
     context,
     graphqlEndpoint: "/api/graphql",
