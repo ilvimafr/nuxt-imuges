@@ -9,7 +9,7 @@ const user = useSupabaseUser();
 <template>
 
   <div class="flex gap-8 items-stretch">
-    <img :src="user?.user_metadata?.avatar_url" class="rounded-lg h-full w-32 min-w-32 block mb-10"/>
+    <img :src="user?.user_metadata?.avatar_url" class="rounded-lg h-full w-32 min-w-32 block" alt="Profile Image"/>
 
     <div class="grow">
       <label for="settings-email" class="w-full block cursor-pointer font-semibold text-lg focus:outline-2">
