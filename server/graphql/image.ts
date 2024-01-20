@@ -17,6 +17,11 @@ export const Image = {
     image.jpeg({ quality });
   },
 
+  async getAspect(image: sharp.Sharp) {
+    const metadata = await image.metadata();
+    return metadata.width! / metadata.height!;
+  },
+
   async resizeByMaxSize(image: sharp.Sharp, maxSize: number) {
     const metadata = await image.metadata();
 
@@ -35,14 +40,14 @@ export const Image = {
     }
   },
 
-  async resizeByWidth(image: sharp.Sharp, resultWidth: number) {
+  async resizeByHeight(image: sharp.Sharp, resultHeight: number) {
     const metadata = await image.metadata();
 
     let width = metadata.width || 0;
     let height = metadata.height || 0;
 
-    height = Math.round(height / (width / resultWidth));
-    width = resultWidth;
+    width = Math.round(width / (height / resultHeight));
+    height = resultHeight;
     image.resize(width, height);
   },
 

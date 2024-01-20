@@ -1,7 +1,12 @@
 <script setup lang="ts">
-await navigateTo('/newest/');
 </script>
 
 <template>
-  <h1 class="font-semibold text-3xl">Index page</h1>
+  <h1 class="font-semibold text-4xl mt-4 mb-10 text-center">
+    <UIcon
+      name="i-fontisto-random"
+      class="align-[-4px]"
+    />
+    Trending Images
+  </h1>
 </template>

@@ -98,6 +98,9 @@ export const resolvers: Resolvers = {
       }
 
       try {
+        const image = Image.createFromBase64(args.data);
+        const aspect = await Image.getAspect(image);
+
         // Insert new image and get generated uniqe ID
         const result = await prisma.image.create({
           include: {
@@ -106,19 +109,19 @@ export const resolvers: Resolvers = {
           data: {
             name: args.name,
             description: args.description,
+            aspect: aspect,
             authorID: user.id,
           }
         });
 
         // Process and load image to supabase
-        const image = Image.createFromBase64(args.data);
         await Image.resizeByMaxSize(image, 1500);
         Image.setQuality(image, 70);
         await Image.loadToSupabase(image, result.id, context);
 
         // Process and load preview to supabase
         const preview = Image.createFromBase64(args.data);
-        await Image.resizeByWidth(preview, 400);
+        await Image.resizeByHeight(preview, 300);
         Image.setQuality(preview, 70);
         await Image.loadToSupabase(preview, 'preview_' + result.previewID, context);
 
