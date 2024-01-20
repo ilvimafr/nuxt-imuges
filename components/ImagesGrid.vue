@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { type Image as TImage } from '../types';
 defineProps<{
-  images: [],
+  images: TImage[],
 }>();
 </script>
 

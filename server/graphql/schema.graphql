@@ -16,6 +16,7 @@ type Image {
 
 type Query {
   getUser(id: ID!): User
+  getImage(id: ID!): Image
   getNewestImages(start: Int!, count: Int!): [Image]
 }
 

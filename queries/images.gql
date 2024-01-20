@@ -1,3 +1,17 @@
+query GetImage($id: ID!) {
+  getImage(id: $id) {
+    id
+    previewID
+    name
+    description
+    createdAt
+    aspect
+    author {
+      name
+    }
+  }
+}
+
 query GetNewestImages($start: Int!, $count: Int!) {
   getNewestImages(start: $start, count: $count) {
     id

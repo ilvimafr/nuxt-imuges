@@ -49,8 +49,14 @@ export type MutationCreateImageArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getImage?: Maybe<Image>;
   getNewestImages?: Maybe<Array<Maybe<Image>>>;
   getUser?: Maybe<User>;
+};
+
+
+export type QueryGetImageArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -184,6 +190,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  getImage?: Resolver<Maybe<ResolversTypes['Image']>, ParentType, ContextType, RequireFields<QueryGetImageArgs, 'id'>>;
   getNewestImages?: Resolver<Maybe<Array<Maybe<ResolversTypes['Image']>>>, ParentType, ContextType, RequireFields<QueryGetNewestImagesArgs, 'count' | 'start'>>;
   getUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
 };

@@ -45,6 +45,29 @@ export const resolvers: Resolvers = {
       }
     },
 
+    async getImage(_, args) {
+      try {
+        let image = await prisma.image.findFirst({
+          where: {
+            id: args.id
+          },
+          include: {
+            author: true,
+          }
+        });
+
+        if (!image) {
+          return null;
+        }
+
+        const gqlResult = image as unknown as TImage;
+        gqlResult.createdAt = image.createdAt.toDateString();
+        return gqlResult;
+      } catch (_error) {
+        return null;
+      }
+    },
+
     async getNewestImages(_, args) {
       try {
         let images = await prisma.image.findMany({
