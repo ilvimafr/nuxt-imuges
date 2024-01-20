@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import type appConfig from '~/app.config';
-
-const images = reactive([]);
+import { type Image as TImage } from '../types';
+const images = reactive<TImage[]>([]);
 const isLoading = ref(true); 
 
 onMounted(() => {
   GqlGetNewestImages({ start: 0, count: 20 })
     .then((result) => {
-      images.push(...result.getNewestImages);
+      images.push(...result.getNewestImages as TImage[]);
       isLoading.value = false;
     })
     .catch(() => {
