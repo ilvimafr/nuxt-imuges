@@ -4,8 +4,9 @@ type User {
 }
 type Image {
   id:          ID!
+  previewID:   ID!
   name:        String!
-  description: String
+  description: String!
   createdAt:   String!
   published:   Boolean!
   author:      User!

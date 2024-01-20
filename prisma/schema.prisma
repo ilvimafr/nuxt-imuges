@@ -10,6 +10,7 @@ datasource db {
 
 model Image {
   id          String    @id @unique @default(uuid()) @db.Uuid
+  previewID   String    @unique @default(uuid()) @db.Uuid
   name        String
   description String? 
   createdAt   DateTime  @default(now())

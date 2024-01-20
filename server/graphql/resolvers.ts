@@ -1,14 +1,10 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 import { GraphQLError } from 'graphql'
 import { serverSupabaseClient, serverSupabaseUser } from '#supabase/server';
-import { Resolvers } from '../../types';
-import sharp from 'sharp';
+import { Resolvers, Image as TImage } from '../../types';
+import { Image } from './image';
 
 const prisma = new PrismaClient();
-
-if (!process.env.SUPABASE_STORAGE) {
-  throw Error("Environment variable `SUPABASE_STORAGE` is undefined.");
-}
 
 export const resolvers: Resolvers = {
   Query: {
@@ -81,6 +77,9 @@ export const resolvers: Resolvers = {
       try {
         // Insert new image and get generated uniqe ID
         const result = await prisma.image.create({
+          include: {
+            author: true,
+          },
           data: {
             name: args.name,
             description: args.description,
@@ -88,40 +87,21 @@ export const resolvers: Resolvers = {
           }
         });
 
-        const imageBuffer = Buffer.from(args.data.split(';base64,').pop() || '', 'base64url');
-        const image = sharp(imageBuffer);
-        const metadata = await image.metadata();
+        // Process and load image to supabase
+        const image = Image.createFromBase64(args.data);
+        await Image.resizeByMaxSize(image, 1500);
+        Image.setQuality(image, 70);
+        await Image.loadToSupabase(image, result.id, context);
 
-        // Resize if bigger than 1000px
-        let width = metadata.width || 0;
-        let height = metadata.height || 0;
-        const maxSize = 1500;
+        // Process and load preview to supabase
+        const preview = Image.createFromBase64(args.data);
+        await Image.resizeByWidth(preview, 400);
+        Image.setQuality(preview, 70);
+        await Image.loadToSupabase(preview, 'preview_' + result.previewID, context);
 
-        if (width > maxSize || height > maxSize) {
-          if (width > height) {
-            height = Math.round(height / (width / maxSize));
-            width = maxSize;
-          } else {
-            width = Math.round(width / (height / maxSize));
-            height = maxSize;
-          }
-          image.resize(width, height);
-        }
-
-        // Convert to JPEG and set quality to 85%
-        image.jpeg({
-          quality: 70
-        });
-
-        // Load image to Supabase by ID
-        const client = await serverSupabaseClient(context);
-        await client.storage
-          .from(process.env.SUPABASE_STORAGE || '')
-          .upload(result.id + '.jpeg', await image.toBuffer(), {
-            contentType: 'image/jpeg'
-          });
-
-        return result;
+        const gqlResult = result as unknown as TImage;
+        gqlResult.createdAt = result.createdAt.toDateString();
+        return gqlResult;
       } catch (_error) {
         throw new GraphQLError("Failed to load image!");
       }
