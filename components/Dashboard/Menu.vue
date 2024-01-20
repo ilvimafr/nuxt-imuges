@@ -7,7 +7,7 @@
     />
     <DashboardMenuLink
       href="/dashboard/upload/"
-      title="Upload New Image"
+      title="Upload Image"
       iconName="i-heroicons-arrow-down-tray"
     />
     <DashboardMenuLink

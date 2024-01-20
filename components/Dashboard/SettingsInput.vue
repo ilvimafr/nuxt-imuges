@@ -14,7 +14,7 @@ const inputModel = props.value || model;
 <template>
   <label
     :for="id"
-    class="w-full block cursor-pointer font-semibold text-lg focus:outline-2 focus:outline-emerald-600"
+    class="w-full block cursor-pointer font-semibold text-lg"
   >
     {{ title }}:
   </label>
