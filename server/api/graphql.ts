@@ -4,7 +4,7 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { resolvers } from '../graphql/resolvers';
 import schema from '../graphql/schema.graphql';
 
-export const GraphQLServer = async (context: H3Event<EventHandlerRequest>) => {
+export const GraphQLServer = (context: H3Event<EventHandlerRequest>) => {
   return createYoga({
     schema: makeExecutableSchema({
       resolvers: resolvers,
@@ -15,13 +15,13 @@ export const GraphQLServer = async (context: H3Event<EventHandlerRequest>) => {
     landingPage: false,
     multipart: true,
     cors: true,
-    logging: "debug",
+    // logging: "debug",
   });
 };
 
 export default defineEventHandler(async (event) => {
   if (getRequestURL(event).pathname.startsWith("/api/graphql")) {
     const { req, res } = event.node;
-    return (await GraphQLServer(event))(req, res);
+    return GraphQLServer(event)(req, res);
   }
 });

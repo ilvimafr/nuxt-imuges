@@ -19,7 +19,7 @@ const inactiveClass = `
   dark:hover:bg-zinc-700 dark:text-zinc-300 dark:hover:text-zinc-100
 `;
 const activeClass = `
-  bg-emerald-600 font-semibold text-white [text-shadow:_0_1px_3px_rgb(0_0_0_/_40%)]
+  bg-emerald-500 dark:bg-emerald-400 font-semibold text-white dark:text-zinc-800
 `;
 const isActive = computed(() => useRoute().path === props.href);
 </script>

@@ -1,55 +1,94 @@
 <script setup lang="ts">
+import { type GraphQLError } from 'graphql';
 definePageMeta({
   middleware: ['redirect-if-logged-out'],
   layout: 'dashboard',
 });
+
 const user = useSupabaseUser();
+const imugesUser = useImugesUser();
+const { userName } = storeToRefs(imugesUser);
+const userNameError = ref('');
+const successMessage = ref('');
+const isSaving = ref(false);
+
+function saveSettings() {
+  if (isSaving.value) {
+    return;
+  }
+
+  isSaving.value = true;
+  userNameError.value = '';
+  successMessage.value = '';
+
+  imugesUser.changeUserName(userName.value)
+    .then(() => {
+      successMessage.value = 'Your settings have been successfully saved!';
+    })
+    .catch((error) => {
+      userNameError.value = (error.gqlErrors as GraphQLError[])[0].message;
+    })
+    .finally(() => {
+      isSaving.value = false;
+    });
+}
 </script>
+
 
 <template>
 
-  <div class="flex gap-8 items-stretch">
-    <img :src="user?.user_metadata?.avatar_url" class="rounded-lg h-full w-32 min-w-32 block" alt="Profile Image"/>
+  <form @submit.prevent="saveSettings">
 
-    <div class="grow">
-      <label for="settings-email" class="w-full block cursor-pointer font-semibold text-lg focus:outline-2">
-        Your Email:
-      </label>
-      <input
-        type="text"
-        id="settings-email"
-        class="w-full mt-1 px-3 py-2 rounded-md bg-zinc-800 text-stone-400"
-        :value="user?.email"
-        disabled
+    <div class="flex gap-8 items-center">
+      <img
+        :src="user?.user_metadata?.avatar_url"
+        class="rounded-lg h-full mt-1 w-32 min-w-32 block"
+        alt="Profile Image"
       />
 
-      <label for="settings-provider" class="w-full block mt-3 cursor-pointer font-semibold  text-lg focus:outline-2">
-        Provider:
-      </label>
-      <input
-        type="text"
-        id="settings-provider"
-        class="w-full mt-1 px-3 py-2 rounded-md bg-zinc-800 text-stone-400"
-        :value="user?.app_metadata?.provider"
-        disabled
-      />
+      <div class="grow">
+        <DashboardSettingsInput
+          id="name"
+          type="text"
+          title="Your Email"
+          :value="user?.email"
+          disabled
+        />
+        <div class="h-4"></div>
+        <DashboardSettingsInput
+          id="name"
+          type="text"
+          title="Provider"
+          :value="user?.app_metadata?.provider"
+          disabled
+        />
+      </div>
     </div>
-  </div>
 
-  <hr class="my-8 border-zinc-800 border-2"/>
+    <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-2"/>
 
-  <label for="settings-name" class="w-full block cursor-pointer font-semibold text-lg focus:outline-2 focus:outline-emerald-600">
-    Your Name:
-  </label>
-  <input
-    type="text"
-    id="settings-name"
-    class="w-full mt-1 px-3 py-2 rounded-md bg-zinc-700 text-lg"
-    value="Name"
-  />
+    <DashboardSettingsInput
+      id="name"
+      type="text"
+      title="Your Name"
+      :error="userNameError"
+      v-model="userName"
+    />
 
-  <hr class="mt-10 mb-6 border-zinc-800 border-2"/>
+    <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-2"/>
 
-  <button class="bg-emerald-600 px-4 py-1 text-lg rounded-md">Save</button>
+    <UButton
+      type="submit"
+      class="text-lg"
+      color="emerald"
+      :loading="isSaving"
+      :label="isSaving ? 'Saving' : 'Save'"
+    />
+
+    <div v-if="successMessage" class="py-3 text-lg text-emerald-600">
+      {{ successMessage }}
+    </div>
+
+  </form>
 
 </template>

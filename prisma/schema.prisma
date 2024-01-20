@@ -17,8 +17,7 @@ model Image {
 }
 
 model User {
-  id     String   @unique @default(cuid()) @db.Uuid
-  email  String   @unique
-  name   String?
+  id     String   @id @unique @default(cuid()) @db.Uuid
+  name   String   @unique
   images Image[]
 }

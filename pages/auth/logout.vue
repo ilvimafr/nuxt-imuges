@@ -4,9 +4,8 @@ definePageMeta({
   layout: 'centered',
 });
 
-useSupabaseClient().auth.signOut().then(() => {
-  navigateTo('/');
-});
+await useSupabaseClient().auth.signOut();
+await navigateTo('/');
 </script>
 
 <template>

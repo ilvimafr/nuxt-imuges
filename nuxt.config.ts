@@ -17,20 +17,13 @@ export default defineNuxtConfig({
     }
   },
   modules: [
-    '@nuxtjs/apollo',
+    '@pinia/nuxt',
     '@nuxtjs/supabase',
+    'nuxt-graphql-client',
     '@nuxt/ui',
     '@nuxtjs/google-fonts',
     'nuxt-svgo',
   ],
-  apollo: {
-    clients: {
-      default: {
-        httpEndpoint: `${getURL()}/api/graphql`,
-        browserHttpEndpoint: '/api/graphql',
-      }
-    },
-  },
   googleFonts: {
     families: {
       'Lexend+Deca': {
@@ -47,7 +40,16 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      url: getURL()
+      url: getURL(),
+      'graphql-client': {
+        clients: {
+          default: {
+            host: `${getURL()}/api/graphql`,
+            clientHost: '/api/graphql',
+            schema: './server/graphql/schema.graphql'
+          }
+        },
+      },
     }
   },
 })

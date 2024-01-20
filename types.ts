@@ -27,26 +27,29 @@ export type Image = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addUser?: Maybe<Scalars['Boolean']['output']>;
+  changeUserName?: Maybe<Scalars['Boolean']['output']>;
 };
 
 
-export type MutationAddUserArgs = {
-  email: Scalars['String']['input'];
-  id: Scalars['ID']['input'];
+export type MutationChangeUserNameArgs = {
+  name: Scalars['String']['input'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  users?: Maybe<Array<Maybe<User>>>;
+  getUser?: Maybe<User>;
+};
+
+
+export type QueryGetUserArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type User = {
   __typename?: 'User';
-  email: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   images?: Maybe<Array<Maybe<Image>>>;
-  name?: Maybe<Scalars['String']['output']>;
-  uuid: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
 };
 
 
@@ -150,18 +153,17 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  addUser?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationAddUserArgs, 'email' | 'id'>>;
+  changeUserName?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationChangeUserNameArgs, 'name'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
+  getUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   images?: Resolver<Maybe<Array<Maybe<ResolversTypes['Image']>>>, ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  uuid?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

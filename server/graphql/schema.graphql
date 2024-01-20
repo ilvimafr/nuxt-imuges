@@ -1,7 +1,6 @@
 type User {
-  uuid:   ID!
-  email:  String!
-  name:   String
+  id:     ID!
+  name:   String!
   images: [Image]
 }
 type Image {
@@ -13,9 +12,9 @@ type Image {
 }
 
 type Query {
-  users: [User]
+  getUser(id: ID!): User
 }
 
 type Mutation {
-  addUser(id: ID!, email: String!): Boolean
+  changeUserName(name: String!): Boolean
 }

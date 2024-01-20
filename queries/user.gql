@@ -1,0 +1,9 @@
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    name
+  }
+}
+
+mutation ChangeUserName($name: String!) {
+  changeUserName(name: $name)
+}
