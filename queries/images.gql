@@ -1,0 +1,5 @@
+mutation CreateImage($name: String!, $description: String!, $data: String!) {
+  createImage(name: $name, description: $description, data: $data) {
+    id
+  }
+}

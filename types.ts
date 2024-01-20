@@ -21,17 +21,27 @@ export type Image = {
   author: User;
   authorID: Scalars['ID']['output'];
   createdAt: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
   published: Scalars['Boolean']['output'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   changeUserName?: Maybe<Scalars['Boolean']['output']>;
+  createImage?: Maybe<Image>;
 };
 
 
 export type MutationChangeUserNameArgs = {
+  name: Scalars['String']['input'];
+};
+
+
+export type MutationCreateImageArgs = {
+  data: Scalars['String']['input'];
+  description: Scalars['String']['input'];
   name: Scalars['String']['input'];
 };
 
@@ -48,7 +58,6 @@ export type QueryGetUserArgs = {
 export type User = {
   __typename?: 'User';
   id: Scalars['ID']['output'];
-  images?: Maybe<Array<Maybe<Image>>>;
   name: Scalars['String']['output'];
 };
 
@@ -147,13 +156,16 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
   author?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   authorID?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   published?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   changeUserName?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationChangeUserNameArgs, 'name'>>;
+  createImage?: Resolver<Maybe<ResolversTypes['Image']>, ParentType, ContextType, RequireFields<MutationCreateImageArgs, 'data' | 'description' | 'name'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -162,7 +174,6 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  images?: Resolver<Maybe<Array<Maybe<ResolversTypes['Image']>>>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

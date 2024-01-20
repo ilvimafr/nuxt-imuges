@@ -1,16 +1,21 @@
 <script setup lang="ts">
+import { type GraphQLError } from 'graphql';
 definePageMeta({
   middleware: ['redirect-if-logged-out'],
   layout: 'dashboard',
 });
 const isLoading = ref(false);
 const preview = ref('');
+const name = ref('');
+const description = ref('');
+const uploadErrorMessage = ref('');
 
 function fileChange(e: Event) {
   const file = (e.target as HTMLInputElement).files;
   if (file) {
     const fileReader = new FileReader();
     fileReader.onloadend = (e: ProgressEvent) => {
+      name.value = file[0].name;
       preview.value = fileReader.result as string;
     };
     fileReader.readAsDataURL(file[0]);
@@ -27,8 +32,23 @@ function load(e: Event) {
     return;
   }
   isLoading.value = true;
-  const name = (e.target as HTMLFormElement).elements['upload-name'].value;
-  const description = (e.target as HTMLFormElement).elements['upload-description'].value;
+
+  GqlCreateImage({
+    name: name.value,
+    description: description.value,
+    data: preview.value,
+  })
+    .then((result) => {
+      if (result.createImage?.id) {
+        navigateTo(`/image/${result.createImage.id}`);
+      }
+    })
+    .catch((error) => {
+      uploadErrorMessage.value = (error.gqlErrors[0] as GraphQLError).message;
+    })
+    .finally(() => {
+      isLoading.value = false;
+    });
 }
 </script>
 
@@ -61,7 +81,7 @@ function load(e: Event) {
     <img
       :src="preview"
       alt=""
-      class="w-full rounded-md block min-w-0"
+      class="w-full rounded-md block min-w-0 object-contain"
     />
 
     <form
@@ -88,6 +108,7 @@ function load(e: Event) {
         id="upload-name"
         size="xl"
         class="w-full mt-1 text-xl"
+        v-model="name"
       />
 
       <label
@@ -100,17 +121,24 @@ function load(e: Event) {
         id="upload-description"
         size="xl"
         class="w-full mt-1 text-xl"
+        v-model="description"
       />
 
       <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-2"/>
 
       <UButton
+        color="emerald"
         type="submit"
         class="text-lg"
         icon="i-heroicons-arrow-down-tray"
         :loading="isLoading"
         :label="isLoading ? 'Loading...' : 'Load'"
       />
+
+      <div v-if="uploadErrorMessage" class="py-3 text-lg text-rose-600">
+        {{ uploadErrorMessage }}
+      </div>
+
     </form>
   </div>
 
