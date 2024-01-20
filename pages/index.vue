@@ -2,9 +2,9 @@
 </script>
 
 <template>
-  <h1 class="font-semibold text-4xl mt-4 mb-10 text-center">
+  <h1 class="font-semibold text-4xl py-8 mb-10 text-center bg-blue-200 dark:bg-blue-950 rounded-lg">
     <UIcon
-      name="i-fontisto-random"
+      name="i-heroicons-fire"
       class="align-[-4px]"
     />
     Trending Images
