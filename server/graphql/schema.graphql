@@ -9,12 +9,14 @@ type Image {
   description: String!
   createdAt:   String!
   published:   Boolean!
+  aspect:      Float!
   author:      User!
   authorID:    ID!
 }
 
 type Query {
   getUser(id: ID!): User
+  getNewestImages(start: Int!, count: Int!): [Image]
 }
 
 type Mutation {

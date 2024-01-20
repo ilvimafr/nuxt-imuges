@@ -43,6 +43,29 @@ export const resolvers: Resolvers = {
       } catch (_error) {
         return null;
       }
+    },
+
+    async getNewestImages(_, args) {
+      try {
+        let images = await prisma.image.findMany({
+          skip: args.start,
+          take: args.count,
+          orderBy: {
+            createdAt: 'desc'
+          },
+          include: {
+            author: true,
+          }
+        });
+
+        const gqlResult = images as unknown as TImage[];
+        gqlResult.forEach((item, i) => {
+          item.createdAt = images[i].createdAt.toDateString();
+        });
+        return gqlResult;
+      } catch (_error) {
+        return null;
+      }
     }
   },
 

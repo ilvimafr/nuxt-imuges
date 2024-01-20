@@ -18,6 +18,7 @@ export type Scalars = {
 
 export type Image = {
   __typename?: 'Image';
+  aspect: Scalars['Float']['output'];
   author: User;
   authorID: Scalars['ID']['output'];
   createdAt: Scalars['String']['output'];
@@ -48,7 +49,14 @@ export type MutationCreateImageArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getNewestImages?: Maybe<Array<Maybe<Image>>>;
   getUser?: Maybe<User>;
+};
+
+
+export type QueryGetNewestImagesArgs = {
+  count: Scalars['Int']['input'];
+  start: Scalars['Int']['input'];
 };
 
 
@@ -134,8 +142,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Image: ResolverTypeWrapper<Image>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
@@ -145,8 +155,10 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
+  Float: Scalars['Float']['output'];
   ID: Scalars['ID']['output'];
   Image: Image;
+  Int: Scalars['Int']['output'];
   Mutation: {};
   Query: {};
   String: Scalars['String']['output'];
@@ -154,6 +166,7 @@ export type ResolversParentTypes = {
 };
 
 export type ImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']> = {
+  aspect?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   author?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   authorID?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -171,6 +184,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  getNewestImages?: Resolver<Maybe<Array<Maybe<ResolversTypes['Image']>>>, ParentType, ContextType, RequireFields<QueryGetNewestImagesArgs, 'count' | 'start'>>;
   getUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
 };
 

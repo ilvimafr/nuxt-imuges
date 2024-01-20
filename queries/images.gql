@@ -1,3 +1,17 @@
+query GetNewestImages($start: Int!, $count: Int!) {
+  getNewestImages(start: $start, count: $count) {
+    id
+    previewID
+    name
+    description
+    createdAt
+    aspect
+    author {
+      name
+    }
+  }
+}
+
 mutation CreateImage($name: String!, $description: String!, $data: String!) {
   createImage(name: $name, description: $description, data: $data) {
     id

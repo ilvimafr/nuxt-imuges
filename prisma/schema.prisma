@@ -15,6 +15,7 @@ model Image {
   description String? 
   createdAt   DateTime  @default(now())
   published   Boolean   @default(false)
+  aspect      Float     @default(1)
   author      User      @relation(fields: [authorID], references: [id])
   authorID    String    @db.Uuid
 }

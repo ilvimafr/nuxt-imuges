@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Image" ADD COLUMN     "aspect" DOUBLE PRECISION NOT NULL DEFAULT 1;
