@@ -6,13 +6,19 @@ imgues mainly uses: Nuxt 3, Supabase, Supabase Storage, Prisma, GraphQL, Nuxt Gr
 
 Demo available on [Vercel](https://nuxt-imuges.vercel.app)
 
-![main-screen](https://raw.githubusercontent.com/ilvimafr/nuxt-imuges/main/.github/assets/main-screen.png)
+![main-screen](https://raw.githubusercontent.com/ilvimafr/nuxt-imuges/main/.github/assets/main-screen.png?v=0.0.4)
+![main-screen-2](https://raw.githubusercontent.com/ilvimafr/nuxt-imuges/main/.github/assets/main-screen-2.png?v=0.0.4)
+![main-screen-3](https://raw.githubusercontent.com/ilvimafr/nuxt-imuges/main/.github/assets/main-screen-3.png?v=0.0.4)
 
 ## Features
 - Dark and light modes
 - User authorization through GitHub
 - Dashboard settings page
+- Dashboard upload page
 - Managing settings with GraphQL
+- Uploading files to Supabase Storage with GraphQL
+- Page with newest loaded images
+- Image view page with information
 
 ## Getting Started
 
@@ -29,6 +35,7 @@ DATABASE_URL="[SUPABASE_POOLING_URL]?pgbouncer=true&connection_limit=1"
 DIRECT_URL="[SUPABASE_DIRECT_URL]"
 SUPABASE_URL="[SUPABASE_API_URL]"
 SUPABASE_KEY="[SUPABASE_API_KEY]"
+SUPABASE_STORAGE="[SUPABASE_STORAGE_BUCKET_NAME]"
 ```
 
 Don't forget to configure redirect URLs and auth providers in the Supabase dashboard.
