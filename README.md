@@ -53,3 +53,9 @@ npm run dev
 ## Deploy on Vercel
 
 To deploy to Vercel, you need to specify your GitHub repository and specify Environment variables.
+ 
+In addition, you need to specify the environment variable IMUGES_PUBLIC_URL for production only with the value of the production site domain, for example:
+
+```bash
+IMUGES_PUBLIC_URL="https://nuxt-imuges.vercel.app" 
+```

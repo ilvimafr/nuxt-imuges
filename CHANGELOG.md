@@ -1,4 +1,9 @@
-## 0.0.4 (2024-01-20)
+## 0.0.5 (2024-01-21)
+
+### Features:
+- Added IMUGES_PUBLIC_URL environemnt variable
+
+## 0.0.4 (2024-01-21)
 
 ### Features:
 - Dashboard Upload page
