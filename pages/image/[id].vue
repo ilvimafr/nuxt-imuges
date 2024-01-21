@@ -1,35 +1,26 @@
 <script setup lang="ts">
-import { type Image as TImage } from '../types';
-import { type GraphQLError } from 'graphql';
-import { onMounted } from 'vue';
-
 const route = useRoute();
-const image = ref<TImage | null>(null);
 
-onMounted(() => {
-  GqlGetImage({ id: route.params.id })
-    .then((result) => {
-      image.value = result.getImage;
-    })
-    .catch((error) => {
-
-    });
-});
+const { data, pending } = useAsyncGql('GetImage', {
+  id: route.params.id as string,
+}, { lazy: true });
 </script>
 
 <template>
-  <div class="flex gap-10">
+  <div class="flex gap-10 items-start">
     <img
-      class="rounded-lg w-1/2"
-      :src="`${$config.public.supabaseStorage}${image?.id}.jpeg`"
+      v-if="data?.getImage"
+      class="rounded-lg w-1/2 sticky top-8"
+      :src="`${$config.public.supabaseStorage}${data?.getImage?.id}.jpeg`"
       alt=""
     />
+    <div v-else class="w-1/2"></div>
     <div class="w-1/2">
       <h1 class="text-4xl font-semibold">
-        {{ image?.name }}
+        {{ data?.getImage?.name }}
       </h1>
       <p class="text-xl text-zinc-700 dark:text-zinc-300 mt-4">
-        {{ image?.description }}
+        {{ data?.getImage?.description }}
       </p>
 
       <div class="flex justify-between w-full mt-6 opacity-60">
@@ -38,14 +29,14 @@ onMounted(() => {
             name="i-heroicons-user"
             class="align-[-1px] -ml-1 mr-1"
           />
-          <b>{{ image?.author?.name }}</b>
+          <b>{{ data?.getImage?.author?.name }}</b>
         </div>
         <div class="rounded-sm text-md">
           <UIcon
             name="i-heroicons-calendar"
             class="align-[-1px] -ml-1"
           />
-          {{ image?.createdAt }}
+          {{ data?.getImage?.createdAt }}
         </div>
       </div>
 

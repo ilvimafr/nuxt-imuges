@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Image as TImage } from '../types';
+import { type Image as TImage } from '../../types';
 defineProps<{
   images: TImage[],
 }>();
@@ -9,6 +9,7 @@ defineProps<{
   <div class="flex flex-wrap items-start gap-6 mb-10">
     <div
       v-for="image in images"
+      :key="image.id"
       class="
         bg-zinc-200 dark:bg-zinc-800 hover:bg-emerald-500 dark:hover:bg-emerald-900 min-w-[300px]
         relative overflow-hidden rounded-lg w-auto grow cursor-pointer
@@ -50,9 +51,9 @@ defineProps<{
 
     </div>
 
-    <div class="h-[1px] grow w-10"></div>
-    <div class="h-[1px] grow w-10"></div>
-    <div class="h-[1px] grow w-10"></div>
+    <!-- <div key="empty1" class="h-[1px] grow w-10"></div>
+    <div key="empty2" class="h-[1px] grow w-10"></div>
+    <div key="empty3" class="h-[1px] grow w-10"></div> -->
 
   </div>
 </template>
