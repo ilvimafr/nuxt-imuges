@@ -51,9 +51,9 @@ defineProps<{
 
     </div>
 
-    <!-- <div key="empty1" class="h-[1px] grow w-10"></div>
+    <div key="empty1" class="h-[1px] grow w-10"></div>
     <div key="empty2" class="h-[1px] grow w-10"></div>
-    <div key="empty3" class="h-[1px] grow w-10"></div> -->
+    <div key="empty3" class="h-[1px] grow w-10"></div>
 
   </div>
 </template>

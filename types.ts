@@ -52,6 +52,7 @@ export type Query = {
   getImage?: Maybe<Image>;
   getNewestImages?: Maybe<Array<Maybe<Image>>>;
   getUser?: Maybe<User>;
+  getUserNewestImages?: Maybe<Array<Maybe<Image>>>;
 };
 
 
@@ -68,6 +69,13 @@ export type QueryGetNewestImagesArgs = {
 
 export type QueryGetUserArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type QueryGetUserNewestImagesArgs = {
+  count: Scalars['Int']['input'];
+  id: Scalars['ID']['input'];
+  start: Scalars['Int']['input'];
 };
 
 export type User = {
@@ -193,6 +201,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getImage?: Resolver<Maybe<ResolversTypes['Image']>, ParentType, ContextType, RequireFields<QueryGetImageArgs, 'id'>>;
   getNewestImages?: Resolver<Maybe<Array<Maybe<ResolversTypes['Image']>>>, ParentType, ContextType, RequireFields<QueryGetNewestImagesArgs, 'count' | 'start'>>;
   getUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
+  getUserNewestImages?: Resolver<Maybe<Array<Maybe<ResolversTypes['Image']>>>, ParentType, ContextType, RequireFields<QueryGetUserNewestImagesArgs, 'count' | 'id' | 'start'>>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {

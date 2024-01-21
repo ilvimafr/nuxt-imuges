@@ -6,7 +6,6 @@ const props = defineProps<{
 }>();
 
 const { data, pending } = useAsyncGql(props.operation, props.variables, { lazy: true });
-console.log(data.value?.[props.name]);
 </script>
 
 <template>

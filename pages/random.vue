@@ -9,4 +9,10 @@
     />
     Random Images
   </h1>
+
+  <ImagesGqlGrid
+    operation="GetNewestImages"
+    name="getNewestImages"
+    :variables="{ start: 0, count: 20 }"
+  />
 </template>

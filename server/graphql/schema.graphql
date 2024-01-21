@@ -18,6 +18,7 @@ type Query {
   getUser(id: ID!): User
   getImage(id: ID!): Image
   getNewestImages(start: Int!, count: Int!): [Image]
+  getUserNewestImages(id: ID!, start: Int!, count: Int!): [Image]
 }
 
 type Mutation {

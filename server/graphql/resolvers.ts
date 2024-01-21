@@ -6,6 +6,13 @@ import { Image } from './image';
 
 const prisma = new PrismaClient();
 
+function PrismaImageToGqlImage(image: unknown) {
+  const gqlResult = image as TImage;
+  gqlResult.createdAt = (image as { createdAt: Date }).createdAt.toDateString();
+  return gqlResult;
+}
+
+
 export const resolvers: Resolvers = {
   Query: {
     async getUser(_, args, context) {
@@ -81,11 +88,29 @@ export const resolvers: Resolvers = {
           }
         });
 
-        const gqlResult = images as unknown as TImage[];
-        gqlResult.forEach((item, i) => {
-          item.createdAt = images[i].createdAt.toDateString();
+        return images.map((image) => PrismaImageToGqlImage(image));
+      } catch (_error) {
+        return null;
+      }
+    },
+
+    async getUserNewestImages(_, args) {
+      try {
+        let images = await prisma.image.findMany({
+          skip: args.start,
+          take: args.count,
+          orderBy: {
+            createdAt: 'desc'
+          },
+          where: {
+            authorID: args.id,
+          },
+          include: {
+            author: true,
+          }
         });
-        return gqlResult;
+
+        return images.map((image) => PrismaImageToGqlImage(image));
       } catch (_error) {
         return null;
       }
@@ -148,9 +173,7 @@ export const resolvers: Resolvers = {
         Image.setQuality(preview, 70);
         await Image.loadToSupabase(preview, 'preview_' + result.previewID, context);
 
-        const gqlResult = result as unknown as TImage;
-        gqlResult.createdAt = result.createdAt.toDateString();
-        return gqlResult;
+        return PrismaImageToGqlImage(result);
       } catch (_error) {
         throw new GraphQLError("Failed to load image!");
       }
