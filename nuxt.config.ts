@@ -2,7 +2,7 @@ import graphql from '@rollup/plugin-graphql';
 
 function getURL() {
   if (process.env.NUXT_ENV_VERCEL_URL) {
-    return process.env.NUXT_ENV_VERCEL_URL;
+    return `https://${process.env.NUXT_ENV_VERCEL_URL}`;
   }
   return 'http://localhost:3000';
 }

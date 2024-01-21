@@ -5,10 +5,14 @@ const props = defineProps<{
   variables: {[key: string]: any},
 }>();
 
-const { data, pending } = useAsyncGql(props.operation, props.variables, { lazy: true });
+const { data, pending, error } = useAsyncGql(props.operation, props.variables, { lazy: true });
 </script>
 
 <template>
+  <div v-if="error" class="w-full text-3xl text-rose-500">
+    {{ error }}
+  </div>
+
   <div
     v-if="pending"
     class="

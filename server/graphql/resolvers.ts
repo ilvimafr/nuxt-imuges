@@ -95,7 +95,9 @@ export const resolvers: Resolvers = {
     },
 
     async getUserNewestImages(_, args) {
+      console.log('Started...');
       try {
+        console.log('Fetch Prisma...');
         let images = await prisma.image.findMany({
           skip: args.start,
           take: args.count,
@@ -110,6 +112,7 @@ export const resolvers: Resolvers = {
           }
         });
 
+        console.log('Return...');
         return images.map((image) => PrismaImageToGqlImage(image));
       } catch (_error) {
         return null;
