@@ -1,26 +1,31 @@
 <script setup lang="ts">
 const route = useRoute();
 
-const { data, pending } = useAsyncGql('GetImage', {
+const { data } = useAsyncGql('GetImage', {
   id: route.params.id as string,
-}, { lazy: true });
+}, {
+  lazy: true,
+  transform: (result) => {
+    return result?.getImage;
+  },
+});
 </script>
 
 <template>
-  <div class="flex gap-10 items-start">
+  <div class="flex flex-col md:flex-row gap-10 items-start my-4">
     <img
-      v-if="data?.getImage"
-      class="rounded-lg w-1/2 sticky top-8"
-      :src="`${$config.public.supabaseStorage}${data?.getImage?.id}.jpeg`"
+      v-if="data"
+      class="rounded-lg md:w-1/2 md:sticky top-8"
+      :src="`${$config.public.supabaseStorage}${data?.id}.jpeg`"
       alt=""
     />
-    <div v-else class="w-1/2"></div>
-    <div class="w-1/2">
+    <div v-else class="md:w-1/2"></div>
+    <div class="md:w-1/2">
       <h1 class="text-4xl font-semibold">
-        {{ data?.getImage?.name }}
+        {{ data?.name }}
       </h1>
       <p class="text-xl text-zinc-700 dark:text-zinc-300 mt-4">
-        {{ data?.getImage?.description }}
+        {{ data?.description }}
       </p>
 
       <div class="flex justify-between w-full mt-6 opacity-60">
@@ -29,14 +34,14 @@ const { data, pending } = useAsyncGql('GetImage', {
             name="i-heroicons-user"
             class="align-[-1px] -ml-1 mr-1"
           />
-          <b>{{ data?.getImage?.author?.name }}</b>
+          <b>{{ data?.author?.name }}</b>
         </div>
         <div class="rounded-sm text-md">
           <UIcon
             name="i-heroicons-calendar"
             class="align-[-1px] -ml-1"
           />
-          {{ data?.getImage?.createdAt }}
+          {{ data?.createdAt }}
         </div>
       </div>
 

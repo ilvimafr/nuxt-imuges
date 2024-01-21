@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <h1 class="font-semibold text-4xl py-8 mb-10 text-center bg-rose-200 dark:bg-rose-950 rounded-lg">
+  <h1 class="bg-pattern font-semibold text-4xl py-8 mb-10 text-center bg-rose-200 dark:bg-rose-950 rounded-lg">
     <UIcon
       name="i-fontisto-random"
       class="align-[-4px]"

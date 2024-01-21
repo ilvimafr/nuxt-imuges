@@ -1,23 +1,24 @@
-// Imuges User using lazy load
+import type { GetUserQuery } from "#gql";
+
 export const useImugesUser = defineStore('imugesUser', () => {
   const user = useSupabaseUser();
-  const userName = ref('');
-
-  async function refresh() {
-    const data = await GqlGetUser({ id: user.value!.id });
-    userName.value = data.getUser?.name || userName.value;
-  }
+  const { data: userName, refresh: refreshUserName } = useAsyncGql('GetUser', {
+    id: user.value!.id,
+  }, {
+    lazy: true,
+    transform: (test) => {
+      return test?.getUser?.name || '';
+    },
+  });
 
   async function changeUserName(name: string) {
-    await GqlChangeUserName({ name: name });
+    await GqlChangeUserName({ name });
     userName.value = name;
   }
 
-  refresh();
-
   return {
     userName,
+    refreshUserName,
     changeUserName,
-    refresh,
   };
 });

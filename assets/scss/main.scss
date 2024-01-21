@@ -2,3 +2,9 @@
   @apply bg-zinc-100 dark:bg-black;
   @apply min-h-screen min-h-lvh flex flex-col items-stretch;
 }
+
+.bg-pattern {
+  background-image: url('../images/bg-pattern.webp');
+  background-size: cover;
+  background-position: 50% 50%;
+}
