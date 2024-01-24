@@ -164,13 +164,13 @@ export const resolvers: Resolvers = {
 
         // Process and load image to supabase
         await Image.resizeByMaxSize(image, 1500);
-        Image.setQuality(image, 70);
+        Image.setQuality(image, 80);
         await Image.loadToSupabase(image, result.id, context);
 
         // Process and load preview to supabase
         const preview = Image.createFromBase64(args.data);
         await Image.resizeByHeight(preview, 300);
-        Image.setQuality(preview, 70);
+        Image.setQuality(preview, 85);
         await Image.loadToSupabase(preview, 'preview_' + result.previewID, context);
 
         return PrismaImageToGqlImage(result);
