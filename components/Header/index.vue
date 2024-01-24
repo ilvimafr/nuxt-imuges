@@ -6,9 +6,10 @@ const supabaseUser = useSupabaseUser();
 <template>
   <header class="py-3 dark relative text-white">
     <!-- Background -->
-    <div
-      class="absolute bg-zinc-800 w-full md:w-[98%] h-[300px] md:-rotate-3 -top-[120px] md:left-[1%] rounded-3xl"
-    ></div>
+    <div class="
+      header-pattern absolute bg-zinc-800 w-full md:w-[98%] h-[300px] md:-rotate-3 -top-[120px] md:left-[1%]
+      rounded-3xl
+    "></div>
 
     <div class="container flex justify-between items-center gap-10 mt-6 relative z-10">
       <div class="">
@@ -71,3 +72,11 @@ const supabaseUser = useSupabaseUser();
     </div>
   </header>
 </template>
+
+<style scoped lang="scss">
+.header-pattern {
+  background-image: url('../../assets/images/header-pattern.webp');
+  background-size: contain;
+  background-position: 50% 50%;
+}
+</style>
