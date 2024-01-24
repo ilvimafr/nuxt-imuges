@@ -1,14 +1,11 @@
 <template>
-  <h1 class="
-    bg-pattern
-    font-semibold text-4xl py-8 mb-10 text-center bg-emerald-200 dark:bg-emerald-950 rounded-lg
-  ">
+  <TitlePlate>
     <UIcon
       name="i-heroicons-star"
-      class="align-[-4px]"
+      class="text-6xl align-[-14px] bg-gradient-to-r from-violet-600 to-blue-400"
     />
     Newest Images
-  </h1>
+  </TitlePlate>
 
   <ImagesGqlGrid
     operation="GetNewestImages"

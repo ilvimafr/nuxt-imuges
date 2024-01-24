@@ -2,13 +2,13 @@
 </script>
 
 <template>
-  <h1 class="bg-pattern font-semibold text-4xl py-8 mb-10 text-center bg-rose-200 dark:bg-rose-950 rounded-lg">
+  <TitlePlate>
     <UIcon
       name="i-fontisto-random"
-      class="align-[-4px]"
+      class="text-6xl align-[-17px] mr-2 bg-gradient-to-r from-rose-600 to-rose-400"
     />
     Random Images
-  </h1>
+  </TitlePlate>
 
   <ImagesGqlGrid
     operation="GetNewestImages"
