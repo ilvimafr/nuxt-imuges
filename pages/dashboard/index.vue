@@ -10,6 +10,7 @@ const user = useSupabaseUser();
   <ImagesGqlGrid
     operation="GetUserNewestImages"
     name="getUserNewestImages"
-    :variables="{ id: user?.id, start: 0, count: 20 }"
+    :count="20"
+    :variables="{ id: user?.id }"
   />
 </template>

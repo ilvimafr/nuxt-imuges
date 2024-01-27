@@ -3,10 +3,12 @@ const props = defineProps<{
   operation: GqlOps,
   name: string,
   count: number,
+  variables?: {[key: string]: unknown}
 }>();
 const { data, pending, error } = useAsyncGql(props.operation, {
   start: 0,
   count: props.count,
+  ...props.variables,
 }, {
   lazy: true
 });
@@ -26,6 +28,7 @@ onMounted(() => {
       const variables = {
         start: images.length,
         count: props.count,
+        ...props.variables,
       };
       useAsyncGql(props.operation, variables).then((result) => {
         const newImages = result.data.value![props.name];
