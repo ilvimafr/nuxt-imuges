@@ -12,23 +12,36 @@ const { data } = useAsyncGql('GetImage', {
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row gap-10 items-start my-4">
+  <div class="grid grid-cols-2 gap-10 items-start my-4">
+
+    <!-- Image -->
     <img
       v-if="data"
-      class="rounded-lg md:w-1/2 md:sticky top-8"
+      class="md:sticky w-full top-8 rounded-lg bg-zinc-800"
       :src="`${$config.public.supabaseStorage}${data?.id}.jpeg`"
+      :style="{
+        'aspect-ratio': data.aspect || 1,
+      }"
       alt=""
     />
-    <div v-else class="md:w-1/2"></div>
-    <div class="md:w-1/2">
-      <h1 class="text-4xl font-semibold">
+    <div
+      v-else
+      class="bg-zinc-800 w-full pb-[100%] rounded-lg"
+    ></div>
+
+    <!-- Description -->
+    <div>
+      <h1 v-if="data" class="text-4xl font-semibold">
         {{ data?.name }}
       </h1>
-      <p class="text-xl text-zinc-700 dark:text-zinc-300 mt-4">
+      <div v-else class="width-1/2 h-10 bg-zinc-800 rounded-lg"></div>
+
+      <p v-if="data" class="text-xl text-zinc-700 dark:text-zinc-300 mt-4">
         {{ data?.description }}
       </p>
+      <div v-else class="width-1/2 h-40 bg-zinc-800 rounded-lg mt-4"></div>
 
-      <div class="flex justify-between w-full mt-6 opacity-60">
+      <div class="flex justify-between w-full mt-6">
         <div class="rounded-sm text-md">
           <UIcon
             name="i-heroicons-user"
@@ -45,9 +58,9 @@ const { data } = useAsyncGql('GetImage', {
         </div>
       </div>
 
-      <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-2"/>
+      <hr class="my-3 border-zinc-200 dark:border-zinc-800 border-1"/>
 
     </div>
-  </div>
 
+  </div>
 </template>
