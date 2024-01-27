@@ -41,7 +41,7 @@ onMounted(() => {
         ...props.variables,
       };
       useAsyncGql(props.operation, variables).then((result) => {
-        const newImages = result.data.value!;
+        const newImages = result.data.value![props.name];
         isLoading.value = false;
         hasImagesToLoad.value = newImages.length >= props.count;
         images.push(...newImages);
