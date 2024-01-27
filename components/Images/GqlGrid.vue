@@ -1,26 +1,33 @@
 <script setup lang="ts">
+const nuxt = useNuxtApp();
 const props = defineProps<{
   operation: GqlOps,
   name: string,
   count: number,
   variables?: {[key: string]: unknown}
 }>();
+
+// Request images if there no images loaded, otherwise get previous images
 const { data, pending, error } = useAsyncGql(props.operation, {
   start: 0,
   count: props.count,
   ...props.variables,
 }, {
-  lazy: true
+  lazy: true,
+  getCachedData: (key): Record<string, any> => {
+    return nuxt.payload.data[key];
+  }
 });
+
 const loadingElement = ref<HTMLElement | null>(null);
-const isLoading = ref(false);
+const isLoading = ref(!data.value);
 const hasImagesToLoad = ref(true);
 
 // Lazy loading observer
 let observer: IntersectionObserver | null = null;
 onMounted(() => {
   observer = new IntersectionObserver((entries) => {
-    // If visible & not yet loading
+    // If visible & loading not started
     if (entries[0].isIntersecting && !isLoading.value) {
       const images = data.value![props.name];
       isLoading.value = true;
