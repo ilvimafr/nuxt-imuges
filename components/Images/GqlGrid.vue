@@ -14,6 +14,9 @@ const { data, pending, error } = useAsyncGql(props.operation, {
   ...props.variables,
 }, {
   lazy: true,
+  transform: (result) => {
+    return result?.[props.name];
+  },
   getCachedData: (key): Record<string, any> => {
     return nuxt.payload.data[key];
   }
@@ -29,7 +32,7 @@ onMounted(() => {
   observer = new IntersectionObserver((entries) => {
     // If visible & loading not started
     if (entries[0].isIntersecting && !isLoading.value) {
-      const images = data.value![props.name];
+      const images = data.value!;
       isLoading.value = true;
 
       const variables = {
@@ -38,7 +41,7 @@ onMounted(() => {
         ...props.variables,
       };
       useAsyncGql(props.operation, variables).then((result) => {
-        const newImages = result.data.value![props.name];
+        const newImages = result.data.value!;
         isLoading.value = false;
         hasImagesToLoad.value = newImages.length >= props.count;
         images.push(...newImages);
@@ -59,7 +62,7 @@ onBeforeUnmount(() => {
     {{ error }}
   </div>
 
-  <ImagesGrid :images="data?.[name] || []" />
+  <ImagesGrid :images="data || []" />
 
   <div
     ref="loadingElement"
