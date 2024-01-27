@@ -38,7 +38,9 @@ onMounted(() => {
   observer.observe(loadingElement.value!);
 });
 onBeforeUnmount(() => {
-  observer?.unobserve(loadingElement.value!);
+  if (loadingElement.value) {
+    observer?.unobserve(loadingElement.value);
+  }
 });
 </script>
 
