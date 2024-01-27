@@ -1,7 +1,5 @@
-<script setup lang="ts">
-</script>
-
 <template>
+
   <TitlePlate>
     <UIcon
       name="i-fontisto-random"
@@ -13,6 +11,6 @@
   <ImagesGqlGrid
     operation="GetNewestImages"
     name="getNewestImages"
-    :variables="{ start: 0, count: 20 }"
+    :count="20"
   />
 </template>

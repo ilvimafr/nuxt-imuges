@@ -1,4 +1,5 @@
 <template>
+
   <TitlePlate>
     <UIcon
       name="i-heroicons-star"
@@ -10,7 +11,7 @@
   <ImagesGqlGrid
     operation="GetNewestImages"
     name="getNewestImages"
-    :variables="{ start: 0, count: 20 }"
+    :count="20"
   />
 
 </template>

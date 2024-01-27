@@ -2,10 +2,44 @@
 const props = defineProps<{
   operation: GqlOps,
   name: string,
-  variables: {[key: string]: any},
+  count: number,
 }>();
+const { data, pending, error } = useAsyncGql(props.operation, {
+  start: 0,
+  count: props.count,
+}, {
+  lazy: true
+});
+const loadingElement = ref<HTMLElement | null>(null);
+const isLoading = ref(false);
+const hasImagesToLoad = ref(true);
 
-const { data, pending, error } = useAsyncGql(props.operation, props.variables, { lazy: true });
+// Lazy loading observer
+let observer: IntersectionObserver | null = null;
+onMounted(() => {
+  observer = new IntersectionObserver((entries) => {
+    // If visible & not yet loading
+    if (entries[0].isIntersecting && !isLoading.value) {
+      const images = data.value![props.name];
+      isLoading.value = true;
+
+      const variables = {
+        start: images.length,
+        count: props.count,
+      };
+      useAsyncGql(props.operation, variables).then((result) => {
+        const newImages = result.data.value![props.name];
+        isLoading.value = false;
+        hasImagesToLoad.value = newImages.length >= props.count;
+        images.push(...newImages);
+      });
+    }
+  });
+  observer.observe(loadingElement.value!);
+});
+onBeforeUnmount(() => {
+  observer?.unobserve(loadingElement.value!);
+});
 </script>
 
 <template>
@@ -13,20 +47,21 @@ const { data, pending, error } = useAsyncGql(props.operation, props.variables, {
     {{ error }}
   </div>
 
+  <ImagesGrid :images="data?.[name] || []" />
+
   <div
-    v-if="pending"
+    ref="loadingElement"
+    v-if="hasImagesToLoad"
     class="
-      w-full h-60 font-semibold text-4xl text-center flex flex-col items-center justify-center
-      text-zinc-200 opacity-20
+      w-full py-6 pb-8 font-semibold text-4xl text-center flex flex-col items-center justify-center
+      text-zinc-400 dark:text-zinc-600
     "
   >
     <UIcon
       name="i-heroicons-arrow-path"
-      class="mb-4 text-8xl animate-spin"
+      class="mb-4 text-6xl animate-spin"
     />
     Loading
   </div>
-
-  <ImagesGrid :images="data?.[name] || []" />
 
 </template>
