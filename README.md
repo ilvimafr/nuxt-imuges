@@ -7,16 +7,17 @@ imgues mainly uses: Nuxt 3, Supabase, Supabase Storage, Prisma, GraphQL, Nuxt Gr
 Demo available on [Vercel](https://nuxt-imuges.vercel.app)
 
 ![main-screen](https://raw.githubusercontent.com/ilvimafr/nuxt-imuges/main/.github/assets/main-screen.png?v=0.0.4)
-![main-screen-2](https://raw.githubusercontent.com/ilvimafr/nuxt-imuges/main/.github/assets/main-screen-2.png?v=0.0.4)
-![main-screen-3](https://raw.githubusercontent.com/ilvimafr/nuxt-imuges/main/.github/assets/main-screen-3.png?v=0.0.4)
 
 ## Features
 - Dark and light modes
 - User authorization through GitHub
-- Dashboard settings page
-- Dashboard upload page
+- Dashboard My Images page
+- Dashboard Settings page
+- Dashboard Upload page
 - Managing settings with GraphQL
+- Resizing and compressing images, generating previews.
 - Uploading files to Supabase Storage with GraphQL
+- Images grid with lazy loading
 - Page with newest loaded images
 - Image view page with information
 
@@ -54,7 +55,7 @@ npm run dev
 
 To deploy to Vercel, you need to specify your GitHub repository and specify Environment variables.
  
-In addition, you need to specify the environment variable IMUGES_PUBLIC_URL for production only with the value of the production site domain, for example:
+In addition, you need to specify the environment variable `IMUGES_PUBLIC_URL` for production only with the value of the production site domain, for example:
 
 ```bash
 IMUGES_PUBLIC_URL="https://nuxt-imuges.vercel.app" 

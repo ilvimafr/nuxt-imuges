@@ -1,3 +1,10 @@
+## 0.0.6 (2024-01-29)
+
+### Features:
+- Images lazy loading
+- Loading placeholders
+- Comments layout
+
 ## 0.0.5 (2024-01-21)
 
 ### Features:
