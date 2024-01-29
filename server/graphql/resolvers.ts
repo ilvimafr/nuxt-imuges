@@ -8,7 +8,8 @@ const prisma = new PrismaClient();
 
 function PrismaImageToGqlImage(image: unknown) {
   const gqlResult = image as TImage;
-  gqlResult.createdAt = (image as { createdAt: Date }).createdAt.toDateString();
+  const date = (image as { createdAt: Date }).createdAt;
+  gqlResult.createdAt = date.toLocaleDateString();
   return gqlResult;
 }
 
@@ -67,9 +68,7 @@ export const resolvers: Resolvers = {
           return null;
         }
 
-        const gqlResult = image as unknown as TImage;
-        gqlResult.createdAt = image.createdAt.toDateString();
-        return gqlResult;
+        return PrismaImageToGqlImage(image);
       } catch (_error) {
         return null;
       }

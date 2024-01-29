@@ -50,10 +50,6 @@ const { data } = useAsyncGql('GetImage', {
           <b>{{ data?.author?.name }}</b>
         </div>
         <div class="rounded-sm text-md">
-          <UIcon
-            name="i-heroicons-calendar"
-            class="align-[-1px] -ml-1"
-          />
           {{ data?.createdAt }}
         </div>
       </div>
