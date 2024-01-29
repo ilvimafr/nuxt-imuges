@@ -14,6 +14,20 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
+  app: {
+    head: {
+      title: 'Imuges',
+      meta: [{
+        charset: 'utf8'
+      }, {
+        name: 'viewport',
+        content: 'width=device-width, intial-scale=1.0'
+      }, {
+        name: 'description',
+        content: 'Online image sharing and image hosting service with a focus on social gossip'
+      }],
+    }
+  },
   nitro: {
     rollupConfig: {
       plugins: [graphql()]

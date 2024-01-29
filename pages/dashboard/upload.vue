@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { type GraphQLError } from 'graphql';
+
+useHead({
+  title: 'Upload',
+});
 definePageMeta({
   middleware: ['redirect-if-logged-out'],
   layout: 'dashboard',
 });
+
 const isLoading = ref(false);
 const preview = ref('');
 const name = ref('');

@@ -1,3 +1,9 @@
+<script setup langs="ts">
+useHead({
+  title: 'Random',
+});
+</script>
+
 <template>
 
   <TitlePlate>

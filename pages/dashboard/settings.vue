@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { type GraphQLError } from 'graphql';
+
+useHead({
+  title: 'Settings',
+});
 definePageMeta({
   middleware: ['redirect-if-logged-out'],
   layout: 'dashboard',

@@ -1,3 +1,11 @@
+<script setup lang="ts">
+useHead({
+  titleTemplate: (title) => {
+    return `Imuges` + (title ? ` | ${title}` : '');
+  }
+});
+</script>
+
 <template>
 
   <Header />
