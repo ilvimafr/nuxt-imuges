@@ -12,7 +12,7 @@ const { data } = useAsyncGql('GetImage', {
 </script>
 
 <template>
-  <div class="grid grid-cols-2 gap-10 items-start my-4">
+  <div class="grid md:grid-cols-2 gap-10 items-start my-4">
 
     <!-- Image -->
     <img
@@ -60,7 +60,55 @@ const { data } = useAsyncGql('GetImage', {
 
       <hr class="my-3 border-zinc-200 dark:border-zinc-800 border-1"/>
 
+      <!-- Comments -->
+      <h3 class="text-center text-lg font-semibold">Comments (5)</h3>
+      <hr class="my-3 border-zinc-200 dark:border-zinc-800 border-1"/>
+
+      <div class="flex mt-5 group">
+        <div class="min-w-16 max-w-16 h-16 bg-zinc-700 rounded-full mr-6"></div>
+        <div>
+          <b class="text-lg">ilvimafr</b>
+          <p class="leading-5 text-zinc-700 dark:text-zinc-200">
+            Comment body
+          </p>
+          <div class="flex gap-4 text-zinc-500 dark:text-zinc-500 mt-1">
+            <a href="#" class="hover:text-emerald-500">
+              0
+              <UIcon name="i-heroicons-heart" class="align-[-3px]"/>
+            </a>
+            <div>
+              4 hours ago
+            </div>
+            <a href="#" class="invisible group-hover:visible hover:text-emerald-500">Reply</a>
+            <a href="#" class="invisible group-hover:visible hover:text-emerald-500">Report</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="flex mt-5 group">
+        <div class="min-w-16 max-w-16 h-16 bg-zinc-700 rounded-full mr-6"></div>
+        <div>
+          <b class="text-lg">ilvimafr</b>
+          <p class="leading-5 text-zinc-700 dark:text-zinc-200">
+            Comment body
+          </p>
+          <div class="flex gap-4 text-zinc-500 dark:text-zinc-500 mt-1">
+            <a href="#" class="hover:text-emerald-500">
+              0
+              <UIcon name="i-heroicons-heart" class="align-[-3px]"/>
+            </a>
+            <div>
+              4 hours ago
+            </div>
+            <a href="#" class="invisible group-hover:visible hover:text-emerald-500">Reply</a>
+            <a href="#" class="invisible group-hover:visible hover:text-emerald-500">Report</a>
+          </div>
+        </div>
+      </div>
+
     </div>
+
 
   </div>
 </template>
