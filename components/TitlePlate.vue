@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title-plate-bg font-semibold text-4xl py-8 mb-4 text-center rounded-lg">
+  <h1 class="title-plate-bg font-semibold text-4xl py-4 mb-4 text-center rounded-lg">
     <slot />
   </h1>
 </template>
