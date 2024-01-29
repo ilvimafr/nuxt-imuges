@@ -69,7 +69,7 @@ function saveSettings() {
       </div>
     </div>
 
-    <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-2"/>
+    <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-1"/>
 
     <DashboardSettingsInput
       id="name"
@@ -79,7 +79,7 @@ function saveSettings() {
       v-model="userName"
     />
 
-    <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-2"/>
+    <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-1"/>
 
     <UButton
       type="submit"

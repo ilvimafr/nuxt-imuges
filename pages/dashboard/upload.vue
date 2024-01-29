@@ -101,7 +101,7 @@ function load(e: Event) {
         @click="goBack"
       />
 
-      <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-2"/>
+      <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-1"/>
 
       <label
         for="upload-name"
@@ -129,7 +129,7 @@ function load(e: Event) {
         v-model="description"
       />
 
-      <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-2"/>
+      <hr class="my-6 border-zinc-200 dark:border-zinc-800 border-1"/>
 
       <UButton
         color="emerald"
