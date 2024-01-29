@@ -22,6 +22,11 @@ const { data, pending, error } = useAsyncGql(props.operation, {
   }
 });
 
+// Make lazy loading wait to init loading
+watch(data, () => {
+  isLoading.value = false;
+});
+
 const loadingElement = ref<HTMLElement | null>(null);
 const isLoading = ref(!data.value);
 const hasImagesToLoad = ref(true);
@@ -35,6 +40,7 @@ onMounted(() => {
       const images = data.value!;
       isLoading.value = true;
 
+      // Load next images
       const variables = {
         start: images.length,
         count: props.count,
@@ -42,8 +48,8 @@ onMounted(() => {
       };
       useAsyncGql(props.operation, variables).then((result) => {
         const newImages = result.data.value![props.name];
-        isLoading.value = false;
         hasImagesToLoad.value = newImages.length >= props.count;
+        isLoading.value = false;
         images.push(...newImages);
       });
     }
